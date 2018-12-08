@@ -15,8 +15,4 @@ public class Writer {
 		}
 		fout.close();
 	}
-	
-	public static void println(String str, File file) throws IOException {
-		print(str+'\n',file);
-	}
 }
