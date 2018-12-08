@@ -19,9 +19,8 @@ public class tConfig {
 	 * @param comment - the String in the configuration File that is used to start a comment, such as "#"
 	 * @return the HashMap of all keys and values from the configuration file
 	 * @throws IOException if reading the configuration File fails
+	 * @since 1.0
 	 */
-	// Parse a configuration file into a HashMap of values and keys.
-	// Ignores comments and blank lines, as well as comments.
 	public static HashMap<String,String> parseConfig(File configFile, String separate, String comment) throws IOException {
 		HashMap<String,String> map = new HashMap<String,String>();
 		// Setup readers
@@ -58,8 +57,8 @@ public class tConfig {
 	 * @param separate - the String in the configuration File that separates the key from the value, such as ":"
 	 * @param comment - the String in the configuration File that is used to start a comment, such as "#"
 	 * @throws IOException if reading or writing the configuration File fails
+	 * @since 1.0
 	 */
-	// Adds a field and value to config
 	public static void addField(File configFile, String field, String value, String separate, String comment) throws IOException {
 		// Read config
 		HashMap<String,String> map = parseConfig(configFile, separate, comment);
@@ -68,16 +67,18 @@ public class tConfig {
 		map.put(field, value);
 		
 		// Make changes to file string
-		String cfgStr = "";
+		StringBuilder cfgStr = new StringBuilder();
 		for(String key : map.keySet()) {
 			if(cfgStr.length()>0) {
-				cfgStr+="\n";
+				cfgStr.append("\n");
 			}
-			cfgStr+=key+separate+map.get(key);
+			cfgStr.append(key);
+			cfgStr.append(separate);
+			cfgStr.append(map.get(key));
 		}
 		
 		// Write changes
-		Writer.print(cfgStr, configFile);
+		Writer.print(cfgStr.toString(), configFile);
 	}
 	
 	/**
@@ -87,8 +88,8 @@ public class tConfig {
 	 * @param separate - the String in the configuration File that separates the key from the value, such as ":"
 	 * @param comment - the String in the configuration File that is used to start a comment, such as "#"
 	 * @throws IOException if reading or writing the configuration File fails
+	 * @since 1.0
 	 */
-	// Remove field and value from a configuration File
 	public static void removeField(File configFile, String field, String separate, String comment) throws IOException {
 		// Read config
 		HashMap<String,String> map = parseConfig(configFile, separate, comment);
@@ -97,16 +98,18 @@ public class tConfig {
 		map.remove(field);
 		
 		// Make changes to file string
-		String cfgStr = "";
+		StringBuilder cfgStr = new StringBuilder();
 		for(String key : map.keySet()) {
 			if(cfgStr.length()>0) {
-				cfgStr+="\n";
+				cfgStr.append("\n");
 			}
-			cfgStr+=key+separate+map.get(key);
+			cfgStr.append(key);
+			cfgStr.append(separate);
+			cfgStr.append(map.get(key));
 		}
 		
 		// Write changes
-		Writer.print(cfgStr, configFile);
+		Writer.print(cfgStr.toString(), configFile);
 	}
 	
 	/**
@@ -115,20 +118,22 @@ public class tConfig {
 	 * @param map - the Map to generate the configuration File from
 	 * @param separate - the String in the configuration File that separates the key from the value, such as ":"
 	 * @throws IOException if writing the configuration File fails
+	 * @since 1.0
 	 */
-	// Create configuration File from map
 	public static void createConfig(File configFile, Map<String,String> map, String separate) throws IOException {
 		// Convert into string
-		String cfgStr = "";
+		StringBuilder cfgStr = new StringBuilder();
 		for(String key : map.keySet()) {
 			if(cfgStr.length()>0) {
-				cfgStr+="\n";
+				cfgStr.append("\n");
 			}
-			cfgStr+=key+separate+map.get(key);
+			cfgStr.append(key);
+			cfgStr.append(separate);
+			cfgStr.append(map.get(key));
 		}
 		
 		// Write config
-		Writer.print(cfgStr, configFile);
+		Writer.print(cfgStr.toString(), configFile);
 	}
 	
 	/**
@@ -139,8 +144,8 @@ public class tConfig {
 	 * @param separate - the String in the configuration File that separates the key from the value, such as ":"
 	 * @param comment - the String in the configuration File that is used to start a comment, such as "#"
 	 * @throws IOException - if reading or writing the configuration File fails
+	 * @since 1.0
 	 */
-	// Change the value of a field (key)
 	public static void changeValue(File configFile, String field, String value, String separate, String comment) throws IOException {
 		// Read config
 		HashMap<String,String> map = parseConfig(configFile, separate, comment);
@@ -149,16 +154,18 @@ public class tConfig {
 		map.put(field, value);
 		
 		// Make changes to file string
-		String cfgStr = "";
+		StringBuilder cfgStr = new StringBuilder();
 		for(String key : map.keySet()) {
 			if(cfgStr.length()>0) {
-				cfgStr+="\n";
+				cfgStr.append("\n");
 			}
-			cfgStr+=key+separate+map.get(key);
+			cfgStr.append(key);
+			cfgStr.append(separate);
+			cfgStr.append(map.get(key));
 		}
 		
 		// Write changes
-		Writer.print(cfgStr, configFile);
+		Writer.print(cfgStr.toString(), configFile);
 	}
 	
 	/**
@@ -167,17 +174,19 @@ public class tConfig {
 	 * @param comment - the String in the configuration File that is used to start a comment, such as "#"
 	 * @return the lines of the configuration File
 	 * @throws IOException if reading the configuration File fails
+	 * @since 1.0
 	 */
-	// Get the lines of a configuration File in an ArrayList
 	public static ArrayList<String> getLines(File configFile, String comment) throws IOException {
 		ArrayList<String> lines = new ArrayList<String>();
 		
-		String tmp = "";
+		StringBuilder tmpIn = new StringBuilder();
 		FileInputStream fin = new FileInputStream(configFile);
 		while(fin.available()>0) {
-			tmp+=(char)fin.read();
+			tmpIn.append((char)fin.read());
 		}
 		fin.close();
+		
+		String tmp = tmpIn.toString();
 		
 		if(tmp.contains("\n")) {
 			for(String str : tmp.split("\n")) {
@@ -200,8 +209,8 @@ public class tConfig {
 	 * @param comment - the String in the configuration File that is used to start a comment, such as "#"
 	 * @return the lines of the configuration File
 	 * @throws IOException if reading the configuration File fails
+	 * @since 1.0
 	 */
-	// Get the lines of a configuration File in an Array
 	public static String[] getLinesArray(File configFile, String comment) throws IOException {
 		return getLines(configFile, comment).toArray(new String[0]);
 	}
