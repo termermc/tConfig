@@ -27,3 +27,6 @@ myMap.put("field", "value");
 // Convert the HashMap
 tConfig.createConfig(new File("myconfig.ini"), myMap, ":");
 ```
+
+## Javadoc
+Javadocs are available [here](https://termer.net/javadocs/tconfig/).
