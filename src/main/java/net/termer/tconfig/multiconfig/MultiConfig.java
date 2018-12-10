@@ -72,7 +72,7 @@ public class MultiConfig {
 	 */
 	public void refresh() throws IOException {
 		// Create configs directory
-		File configsDir = new File(_Dir+'/');
+		File configsDir = new File(_Dir);
 		if(!configsDir.exists() || !configsDir.isDirectory()) {
 			configsDir.mkdirs();
 		}
