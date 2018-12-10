@@ -30,6 +30,9 @@ public class MultiConfig {
 	 */
 	public MultiConfig(String dir, String separate, String comment) {
 		_Dir = dir;
+		if(!_Dir.endsWith("/")) {
+			_Dir+='/';
+		}
 		_Separate = separate;
 		_Comment = comment;
 	}
@@ -44,6 +47,9 @@ public class MultiConfig {
 	 */
 	public MultiConfig(String dir, String separate, String comment, String extension) {
 		_Dir = dir;
+		if(!_Dir.endsWith("/")) {
+			_Dir+='/';
+		}
 		_Separate = separate;
 		_Comment = comment;
 		_Extension = extension;
