@@ -89,7 +89,7 @@ public class MultiConfig {
 				}
 				
 				// Load the config file
-				tConfig.parseConfig(f, _Separate, _Comment);
+				_Configs.put(name, tConfig.parseConfig(f, _Separate, _Comment));
 			}
 		}
 		
